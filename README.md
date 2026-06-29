@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge\&logo=python)
 ![Status](https://img.shields.io/badge/Status-Development-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=for-the-badge)
+![License](https://img.shields.io/github/license/<YOUR_GITHUB_USERNAME>/ForgeOS?style=for-the-badge)
 
 ---
 
