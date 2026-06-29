@@ -182,7 +182,9 @@ If you'd like to help improve Forge OS, feel free to open an issue or submit a p
 
 # License
 
-Apache License 2.0
+This project is licensed under the **MIT License**.
+
+See the `LICENSE` file for more information.
 
 ---
 
@@ -190,9 +192,34 @@ Apache License 2.0
 
 Forge OS is **not** a real operating system or kernel.
 
-It is a Python-powered virtual operating system designed for education, experimentation, and software development.
+It is a Python-powered virtual operating system designed for education, experimentation, software architecture, and software development. Forge OS runs as a standard Python application while providing its own virtual operating system environment.
 
 ---
+
+## Roadmap
+
+* [x] Boot System
+* [x] Kernel Manager
+* [x] Forge Shell
+* [ ] Virtual Filesystem
+* [ ] User Management
+* [ ] Package Manager (`forgepkg`)
+* [ ] Process Manager
+* [ ] Application Framework
+* [ ] Desktop Environment
+* [ ] Forge Editor
+* [ ] Vimge
+* [ ] Forgium Browser
+* [ ] Plugin SDK
+
+---
+
+## Author
+
+Developed by **ayaan global**.
+
+Forge OS is an open-source project created to explore operating system concepts, software architecture, shell development, virtual filesystems, and developer tooling through a modular Python-based virtual operating system.
+
 
 ## Author
 
