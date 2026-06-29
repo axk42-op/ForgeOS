@@ -6,6 +6,7 @@
 ![Status](https://img.shields.io/badge/Status-Development-orange?style=for-the-badge)
 ![License](https://img.shields.io/github/license/axk42-op/ForgeOS?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-00C853?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge)
 
 ---
 
