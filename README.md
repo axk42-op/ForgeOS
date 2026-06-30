@@ -38,8 +38,7 @@ Forge OS aims to become a complete virtual development platform where users can:
 ### v1.0
 
 * **Forge Shell** — 65+ auto-discovered commands (`help`, `docs`, `source`, `disclaimer`, and more)
-* **Login system** — first-run registration, returning-user login, `passwd`, `logout`
-* **Supabase auth** — cloud account storage in `forge_users` (salted SHA-256 hashes; local fallback)
+* **Login system** — first-run registration, returning-user login, `passwd`, `logout` (local storage)
 * **ForgeOS terminal window** — dedicated boot window on Windows
 * **Virtual filesystem** — in-memory VFS with user home directories
 * **Package manager** — `forgepkg list`, `info`, `install`
@@ -59,7 +58,7 @@ Forge OS aims to become a complete virtual development platform where users can:
 * Boot banner and Rich UI
 * Modular command architecture with auto-discovery
 * Command history, aliases, pipes (basic)
-* Auth stored locally via `platformdirs`, or in **Supabase** when configured (salted SHA-256 hashes — never plain text)
+* Auth stored locally via `platformdirs` (salted SHA-256 hashes — never plain text)
 
 ### Planned
 
@@ -121,14 +120,10 @@ Forge/
 ├── boot.py              # Boot entry point
 ├── cli.py               # forgeos CLI (login, version)
 ├── launcher.py          # ForgeOS window launcher
-├── auth/                # Login, crypto, local + Supabase credential stores
-│   └── supabase_store.py
+├── auth/                # Login, crypto, local credential storage
 ├── docs/
 │   ├── HOME.md          # GitHub Wiki home (copy to wiki)
 │   └── WIKI.md          # GitHub Wiki docs (copy to wiki)
-├── supabase/
-│   └── schema.sql       # Run once in Supabase SQL Editor
-├── .env.example         # Copy to .env for Supabase credentials
 ├── kernel/
 ├── shell/
 │   ├── commands/        # Auto-discovered shell commands
@@ -151,28 +146,7 @@ uv pip install -e .
 python boot.py
 ```
 
-On first launch, Forge OS opens a **ForgeOS** terminal window and prompts you to create an account. On later runs, use `forgeos login` or `python boot.py`.
-
----
-
-## Supabase (cloud accounts)
-
-By default, credentials are stored locally on your machine. To save usernames and **hashed** passwords to Supabase instead:
-
-1. Create a [Supabase](https://supabase.com) project.
-2. In the SQL Editor, run `supabase/schema.sql` to create the `forge_users` table.
-3. Copy `.env.example` → `.env` and set:
-   - `FORGEOS_SUPABASE_URL` — Project Settings → API → Project URL
-   - `FORGEOS_SUPABASE_KEY` — **service role** key (keeps writes working from the CLI; never commit this file)
-4. Restart Forge OS and register or sign in — accounts are stored in `forge_users`.
-
-| Column          | Description                          |
-|-----------------|--------------------------------------|
-| `username`      | Unique login name                    |
-| `password_hash` | SHA-256 hash of `salt:password`      |
-| `salt`          | Random hex per account               |
-
-Without a `.env` file, Forge OS falls back to local storage automatically.
+On first launch, Forge OS opens a **ForgeOS** terminal window and prompts you to create an account. Credentials are saved locally on your machine. On later runs, use `forgeos login` or `python boot.py`.
 
 ---
 
@@ -199,15 +173,6 @@ cd ForgeOS
 uv venv
 uv pip install -r requirements.txt
 uv pip install -e .
-python boot.py
-```
-
-### Optional: Supabase on a new device
-
-```bash
-cp .env.example .env
-# Edit .env with your Supabase URL and key
-# Run supabase/schema.sql once in Supabase SQL Editor
 python boot.py
 ```
 
