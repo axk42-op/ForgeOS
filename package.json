@@ -1,0 +1,42 @@
+{
+  "name": "forgeos",
+  "version": "1.0.0",
+  "description": "Forge OS — a Python virtual operating system with its own shell, filesystem, and apps",
+  "keywords": ["forgeos", "virtual-os", "shell", "cli", "terminal"],
+  "homepage": "https://github.com/forgeos/forgeos",
+  "bugs": {
+    "url": "https://github.com/forgeos/forgeos/issues"
+  },
+  "license": "MIT",
+  "author": "Forge OS Contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forgeos/forgeos.git"
+  },
+  "bin": {
+    "forgeos": "bin/forgeos.js"
+  },
+  "files": [
+    "bin/",
+    "auth/",
+    "filesystem/",
+    "kernel/",
+    "packages/",
+    "shell/",
+    "users/",
+    "boot.py",
+    "cli.py",
+    "launcher.py",
+    "requirements.txt",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "node bin/forgeos.js login",
+    "login": "node bin/forgeos.js login",
+    "prepublishOnly": "node scripts/prepublish-clean.js"
+  }
+}
