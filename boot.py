@@ -13,16 +13,21 @@ from packages.manager import PackageManager
 from shell.banner import BootBanner, BootSequence
 from shell.config import ShellConfig
 from shell.shell import ForgeShell
-from launcher import set_console_title, should_spawn_window, spawn_forgeos_window
+from launcher import set_console_title
+from desktop.icon import apply_window_icon
+from desktop.gui.login import run_login
 
 
 class ForgeOS:
     """Main Forge OS application."""
 
-    VERSION = "1.0.0"
+    VERSION = "2.0.0"
 
-    def __init__(self, username: str | None = None) -> None:
+    def __init__(self, username: str | None = None, *, desktop: bool = False) -> None:
+        self._desktop_mode = desktop
         self._config = ShellConfig(version=self.VERSION)
+        if desktop:
+            self._config.boot_animation = False
         self._console = Console(force_terminal=True, legacy_windows=False)
         self.banner = BootBanner(console=self._console, version=self.VERSION)
         self.boot_sequence = BootSequence(console=self._console)
@@ -36,8 +41,6 @@ class ForgeOS:
         self._boot()
 
     def _boot(self) -> None:
-        self.banner.show_logo()
-
         loaders = [
             (label, loader)
             for label, loader in (
@@ -79,19 +82,59 @@ class ForgeOS:
             packages=self.packages,
             config=self._config,
             console=self._console,
+            gui_mode=self._desktop_mode,
         )
 
     def run(self) -> None:
-        self.banner.show_welcome_panel()
+        if self._desktop_mode:
+            from desktop.gui.app import ForgeDesktop
+
+            ForgeDesktop(self).run()
+            return
+
+        self.banner.show_neofetch(
+            kernel=self.kernel,
+            users=self.users,
+            packages=self.packages,
+            session=self.shell.session,
+        )
         self.shell.start()
 
 
 def run_session() -> int:
-    set_console_title("ForgeOS")
+    set_console_title("Forge OS")
+    apply_window_icon()
     auth = AuthFlow()
     username = auth.authenticate()
     ForgeOS(username=username).run()
     return 0
+
+
+def run_gui_session() -> int:
+    print("Starting Forge OS desktop...", flush=True)
+    try:
+        username = run_login()
+
+        if not username:
+            print("Sign-in cancelled.", flush=True)
+            return 0
+
+        print(f"Welcome, {username}. Loading desktop...", flush=True)
+        ForgeOS(username=username, desktop=True).run()
+        print("Forge OS closed.", flush=True)
+        return 0
+    except Exception as error:
+        import traceback
+
+        print(f"Forge OS failed to start: {error}", flush=True)
+        traceback.print_exc()
+        try:
+            from tkinter import messagebox
+
+            messagebox.showerror("Forge OS", f"Failed to start:\n{error}")
+        except Exception:
+            pass
+        return 1
 
 
 def main() -> int:
@@ -104,16 +147,19 @@ def main() -> int:
     parser.add_argument(
         "--session",
         action="store_true",
-        help="Run inside the ForgeOS terminal session (skip window spawn)",
+        help="Run in legacy full-screen terminal mode",
+    )
+    parser.add_argument(
+        "--gui",
+        action="store_true",
+        help="Run the Forge OS desktop window (default)",
     )
     args = parser.parse_args()
 
-    if args.session or not should_spawn_window():
+    if args.session:
         return run_session()
 
-    spawn_forgeos_window()
-    print("Opening ForgeOS window...")
-    return 0
+    return run_gui_session()
 
 
 if __name__ == "__main__":

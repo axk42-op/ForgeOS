@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "forgeos"
-version = "1.0.0"
+version = "2.0.0"
 description = "Forge OS — a Python virtual operating system"
 readme = "README.md"
 license = { text = "MIT" }
@@ -32,7 +32,10 @@ forgeos = "cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["auth*", "kernel*", "filesystem*", "users*", "packages*", "shell*"]
+include = ["auth*", "kernel*", "filesystem*", "users*", "packages*", "shell*", "desktop*"]
+
+[tool.setuptools.package-data]
+desktop = ["assets/icons/*"]
 
 [tool.setuptools]
 py-modules = ["boot", "cli", "launcher"]

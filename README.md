@@ -3,7 +3,7 @@
 > A Python-powered virtual operating system for developers.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python)
-![Status](https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-00C853?style=for-the-badge)
 
@@ -15,7 +15,7 @@ Forge OS is an open-source virtual operating system built entirely in Python.
 
 Unlike a traditional operating system, Forge OS runs as a Python application while providing its own operating system environment. It is designed for learning, experimentation, software development, and testing operating system concepts without interacting directly with computer hardware.
 
-The project focuses on creating a developer-first environment featuring its own shell, virtual filesystem, package manager, user management, applications, and (planned) desktop environment.
+The project focuses on creating a developer-first environment featuring its own shell, virtual filesystem, package manager, user management, applications, and a desktop environment with windowed apps.
 
 ---
 
@@ -34,6 +34,15 @@ Forge OS aims to become a complete virtual development platform where users can:
 ---
 
 ## Features
+
+### v2.0
+
+* **Desktop environment** — tkinter GUI with taskbar, Start menu, clock, and window manager
+* **Terminal as an app** — Forge Shell runs inside a draggable desktop window
+* **GUI login** — sign-in window before the desktop loads
+* **Forge branding** — SVG/ICO logo, window icon, neofetch-style boot banner
+* **Taskbar menus** — `start`, `menu`, `settings`, `search` commands
+* **Easy launch** — `boot.bat` / `forge.bat` for Windows
 
 ### v1.0
 
@@ -139,14 +148,31 @@ Forge/
 
 ## Quick start
 
+### Windows (recommended)
+
+Double-click `boot.bat` in the Forge folder, or:
+
 ```cmd
-cd Forge
-uv pip install -r requirements.txt
-uv pip install -e .
-python boot.py
+cd /d D:\ForgeOS\Forge
+.\.venv\Scripts\python.exe boot.py
 ```
 
-On first launch, Forge OS opens a **ForgeOS** terminal window and prompts you to create an account. Credentials are saved locally on your machine. On later runs, use `forgeos login` or `python boot.py`.
+Legacy full-screen terminal mode:
+
+```cmd
+cd /d D:\ForgeOS\Forge
+.\.venv\Scripts\python.exe boot.py --session
+```
+
+### Setup from scratch
+
+```cmd
+cd Forge
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe boot.py
+```
 
 ---
 

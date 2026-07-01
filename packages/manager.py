@@ -6,8 +6,8 @@ class PackageManager:
 
     def __init__(self) -> None:
         self._packages: dict[str, dict] = {
-            "forge-shell": {"version": "1.0.0", "description": "Forge Shell terminal"},
-            "forge-core": {"version": "1.0.0", "description": "Forge OS core system"},
+            "forge-shell": {"version": "2.0.0", "description": "Forge Shell terminal"},
+            "forge-core": {"version": "2.0.0", "description": "Forge OS core system"},
         }
 
     def list_packages(self) -> dict[str, dict]:

@@ -44,7 +44,7 @@ class VirtualFileSystem:
         self._mkdir_abs("/var")
         self._mkdir_abs("/tmp")
         self._write_file("/etc/hosts", "127.0.0.1 localhost\n")
-        self._write_file("/etc/forge-release", "Forge OS 1.0.0\n")
+        self._write_file("/etc/forge-release", "Forge OS 2.0.0\n")
         self._write_file(
             "/etc/LICENSE",
             "Forge OS — MIT License\n\nCopyright (c) 2026 Forge OS Contributors\n\n"

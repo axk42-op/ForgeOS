@@ -1,6 +1,6 @@
 {
   "name": "forgeos",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Forge OS — a Python virtual operating system with its own shell, filesystem, and apps",
   "keywords": ["forgeos", "virtual-os", "shell", "cli", "terminal"],
   "homepage": "https://github.com/forgeos/forgeos",

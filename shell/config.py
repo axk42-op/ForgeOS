@@ -8,7 +8,7 @@ from typing import Any
 class ShellConfig:
     """Runtime configuration for Forge Shell."""
 
-    version: str = "1.0.0"
+    version: str = "2.0.0"
     prompt_symbol: str = "$"
     history_max_entries: int = 1000
     enable_completion: bool = True

@@ -8,7 +8,7 @@ class Kernel:
 
     def __init__(self) -> None:
         self._boot_time = datetime.now(timezone.utc)
-        self._version = "1.0.0"
+        self._version = "2.0.0"
         self._name = "Forge Kernel"
 
     @property
